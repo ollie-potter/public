@@ -19,7 +19,6 @@ function setup(){
 }
 
 function draw(){
-    print(redQuarks, antiGreenQuarks, antiBlueQuarks, redTotal)
     redTotal = Number(redQuarks)+Number(antiGreenQuarks)+Number(antiBlueQuarks)
     greenTotal = Number(greenQuarks)+Number(antiRedQuarks)+Number(antiBlueQuarks)
     blueTotal = Number(blueQuarks)+Number(antiRedQuarks)+Number(antiGreenQuarks)
@@ -66,6 +65,7 @@ function draw(){
     text(antiBlueQuarks.toString(), (3*windowWidth/4)+xOffset, (5*windowHeight/6)+yOffset)
 
     strokeWeight(2)
+    fill(0)
     text('Space to clear all', -170+windowWidth/2, 400+windowHeight/2)
     if(colour == [255, 255, 255].toString()){text('Colour charge is balanced!', -250+windowWidth/2, 25+windowHeight/2)} 
     if(colour == [0, 0, 0].toString()){
@@ -93,8 +93,6 @@ function keyTyped() {
 
     for(i in numKeys) {
         if (key == numKeys[i]) {
-
-            print(i)
             if (waitFor == 'r') {redQuarks = i}
             if (waitFor == 'g') {greenQuarks = i}
             if (waitFor == 'b') {blueQuarks = i}
@@ -102,7 +100,6 @@ function keyTyped() {
             if (waitFor == 'ag') {antiGreenQuarks = i}
             if (waitFor == 'ab') {antiBlueQuarks = i}
             waitFor = ''
-            //console.log('r:',redQuarks, 'g:',greenQuarks, 'b:',blueQuarks, 'ar:',antiRedQuarks, 'ag:',antiGreenQuarks, 'ab',antiBlueQuarks)
             break
         }
     }
