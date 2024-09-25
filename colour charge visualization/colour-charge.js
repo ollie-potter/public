@@ -15,6 +15,7 @@ function scaleValues(value, old_max, old_min, new_max, new_min, inverse=false){
 
 function setup(){
     createCanvas(windowWidth, windowHeight)
+    background(0)
 }
 
 function draw(){
@@ -26,8 +27,7 @@ function draw(){
     maximum = max(max(redTotal, greenTotal), blueTotal)
 
     colour = [scaleValues(redTotal, maximum, 0, 0, 255), scaleValues(greenTotal, maximum, 0, 0, 255), scaleValues(blueTotal, maximum, 0, 0, 255)]
-    //print('red: '+redTotal+'/'+maximum, 'green: '+greenTotal+'/'+maximum, 'blue: '+blueTotal+'/'+maximum, )
-    background(colour[0], colour[1], colour[2])
+    background(colour[0], colour[1], colour[2], 40)
     textSize(40)
     stroke(0)
     strokeWeight(3)
@@ -37,37 +37,55 @@ function draw(){
 
     fill(255, 0, 0); 
     circle(1*windowWidth/4, 1*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'r'){fill(255);}else{fill(0);}
     text(redQuarks.toString(), (1*windowWidth/4)+xOffset, (1*windowHeight/6)+yOffset)
 
     fill(0, 255, 0)
     circle(2*windowWidth/4, 1*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'g'){fill(255);}else{fill(0);}
     text(greenQuarks.toString(), (2*windowWidth/4)+xOffset, (1*windowHeight/6)+yOffset)
 
     fill(0, 0, 255)
     circle(3*windowWidth/4, 1*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'b'){fill(255);}else{fill(0);}
     text(blueQuarks.toString(), (3*windowWidth/4)+xOffset, (1*windowHeight/6)+yOffset)
 
     fill(0, 255, 255)
     circle(1*windowWidth/4, 5*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'ar'){fill(255);}else{fill(0);}
     text(antiRedQuarks.toString(), (1*windowWidth/4)+xOffset, (5*windowHeight/6)+yOffset)
 
     fill(255, 0, 255)
     circle(2*windowWidth/4, 5*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'ag'){fill(255);}else{fill(0);}
     text(antiGreenQuarks.toString(), (2*windowWidth/4)+xOffset, (5*windowHeight/6)+yOffset)
 
     fill(255, 255, 0)
     circle(3*windowWidth/4, 5*windowHeight/6, 80)
-    fill(0);
+    if(waitFor == 'ab'){fill(255);}else{fill(0);}
     text(antiBlueQuarks.toString(), (3*windowWidth/4)+xOffset, (5*windowHeight/6)+yOffset)
 
     strokeWeight(2)
-    if(colour == [255, 255, 255].toString()){text('Colour charge is balanced!', -250+windowWidth/2, 25+windowHeight/2)} else{print(colour)}
-
+    text('Space to clear all', -170+windowWidth/2, 400+windowHeight/2)
+    if(colour == [255, 255, 255].toString()){text('Colour charge is balanced!', -250+windowWidth/2, 25+windowHeight/2)} 
+    if(colour == [0, 0, 0].toString()){
+        fill(255)
+        if (waitFor == ''){
+            text('Select quark colour', -170+windowWidth/2, 25+windowHeight/2)
+            xOffset = 13
+            yOffset = 90
+            text('q', (1*windowWidth/4)-xOffset, (1*windowHeight/6)+yOffset)
+            text('w', (2*windowWidth/4)-xOffset, (1*windowHeight/6)+yOffset)
+            text('e', (3*windowWidth/4)-xOffset, (1*windowHeight/6)+yOffset)
+            text('a', (1*windowWidth/4)-xOffset, (5*windowHeight/6)-yOffset+20)
+            text('s', (2*windowWidth/4)-xOffset, (5*windowHeight/6)-yOffset+20)
+            text('d', (3*windowWidth/4)-xOffset, (5*windowHeight/6)-yOffset+20)
+        }
+        else{
+            text('Select quark count', -170+windowWidth/2, 25+windowHeight/2)
+            text('(Number key from 0-9)', -190+windowWidth/2, 125+windowHeight/2)
+        }
+    }
     
 }
 
@@ -95,5 +113,6 @@ function keyTyped() {
     if (key === "a") {waitFor = 'ar'}
     if (key === "s") {waitFor = 'ag'}
     if (key === "d") {waitFor = 'ab'}
+    if (key === " ") {redQuarks = 0; blueQuarks = 0; greenQuarks = 0; antiRedQuarks = 0; antiGreenQuarks = 0; antiBlueQuarks = 0;}
 
 }
